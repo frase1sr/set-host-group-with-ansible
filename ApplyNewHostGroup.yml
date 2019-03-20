@@ -1,0 +1,13 @@
+---
+- name: Set Host Group
+  hosts: '{{ host }}'
+  become: true
+
+  tasks:
+  - name: Set Host Group
+    command: /opt/dynatrace/oneagent/agent/tools/lib64/oneagentutil --set-host-group "{{ host_group }}"
+
+  - name: restart oneagnet service
+    systemd:
+      name: oneagent
+      state: restarted
